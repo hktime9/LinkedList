@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
+#include<bits/stdc++.h>
 #include "rot13server_cpp/rot13server.cpp"
 
 using namespace std;
@@ -300,6 +301,91 @@ public:
 			this->addItem(array[i]);
 		}
 	}
+	int getElementAtIndex(int index)
+	{
+		if((index>=size)||(index<0))
+		{
+			throw std::out_of_range ("Index out of range");
+		}
+		else
+		{
+			node* here= head;
+			for(int i=0;i<index;i++)
+			{
+				here= here->next;
+			}
+			return here->value;
+		}
+	}
+	int indexOf(int query)
+	{
+		int index= 0;
+		node* found= findItem(query);
+		if(found)
+		{
+			node* here= head;
+			while(here->value!=query)
+			{
+				index++;
+				here= here->next;
+			}
+			return index;
+		}
+		return -1;
+	}
+	int count(int query)
+	{
+		int count= 0;
+		node* here= head;
+		for(int i=0;i<size;i++)
+		{
+			if(here->value==query)
+			{
+				count++;
+			}
+			here= here->next;
+		}
+		return count;
+	}
+	int max()
+	{
+		int max= INT_MIN;
+		node* here= head;
+		for(int i=0;i<size;i++)
+		{
+			if(here->value>max)
+			{
+				max= here->value;
+			}
+			here= here->next;
+		}
+		return max;
+	}
+	int min()
+	{
+		int min= INT_MAX;
+		node* here= head;
+		for(int i=0;i<size;i++)
+		{
+			if(here->value<min)
+			{
+				min= here->value;
+			}
+			here= here->next;
+		}
+		return min;
+	}
+	int sum()
+	{
+		int sum= 0;
+		node* here= head;
+		for(int i=0;i<size;i++)
+		{
+			sum= sum+ here->value;
+			here= here->next;
+		}
+		return sum;
+	}
 };
 
 int main()
@@ -315,7 +401,7 @@ int main()
 	list.addItem(220);
 	list.addItem(417);
 	list.addItem(12);
-	// list.sort();
+	list.sort();
 	list.printList();
 	list.deleteItem(20);
 	list.deleteItem(17);
@@ -325,7 +411,7 @@ int main()
 	list.addItem(-292);
 	list.addItem(82);
 	list.printList();
-	// list.sort();
+	list.sort();
 	list.printList();
 	list.clear();
 	int array[6]= {1,2,3,4,5,6};
@@ -335,4 +421,14 @@ int main()
 	linkedList copy;
 	copy= list;
 	copy.printList();
+	cout << copy.getElementAtIndex(4) << endl;
+	cout << copy.indexOf(3) << endl;
+	copy.addItem(5);
+	copy.addItem(5);
+	copy.addItem(5);
+	copy.addItem(5);
+	copy.addItem(-90);
+	cout << copy.count(5) << endl;
+	copy.printList();
+	cout << copy.sum() << endl;
 }
