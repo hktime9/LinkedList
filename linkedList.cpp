@@ -123,6 +123,22 @@ public:
 		size= 0;
 		head= NULL;
 	}
+	linkedList(const linkedList &objectList)
+	{
+		cout << "copy cons" << endl;
+		node* here= objectList.head;
+		int oldSize= objectList.size;
+		for(int i=0;i<oldSize;i++)
+		{
+			this->addItem(here->value);
+		}
+		this->reverse();
+	}
+	~linkedList()
+	{
+		this->clear();
+		delete head;
+	}
 	void addItem(int item)
 	{
 		node* newNode;
@@ -299,7 +315,7 @@ int main()
 	list.addItem(220);
 	list.addItem(417);
 	list.addItem(12);
-	list.sort();
+	// list.sort();
 	list.printList();
 	list.deleteItem(20);
 	list.deleteItem(17);
@@ -309,10 +325,14 @@ int main()
 	list.addItem(-292);
 	list.addItem(82);
 	list.printList();
-	list.sort();
+	// list.sort();
 	list.printList();
 	list.clear();
 	int array[6]= {1,2,3,4,5,6};
 	list.addArray(array,6);
 	list.printList();
+
+	linkedList copy;
+	copy= list;
+	copy.printList();
 }
