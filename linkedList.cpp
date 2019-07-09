@@ -269,6 +269,21 @@ public:
 			addItem(sortedArray[i]);
 		}
 	}
+	void clear()
+	{
+		int currSize= size;
+		for(int i=0;i<currSize;i++)
+		{
+			this->deleteHead();
+		}
+	}
+	void addArray(int* array, int arraySize)
+	{
+		for(int i=arraySize-1;i>=0;i--)
+		{
+			this->addItem(array[i]);
+		}
+	}
 };
 
 int main()
@@ -295,5 +310,9 @@ int main()
 	list.addItem(82);
 	list.printList();
 	list.sort();
+	list.printList();
+	list.clear();
+	int array[6]= {1,2,3,4,5,6};
+	list.addArray(array,6);
 	list.printList();
 }
